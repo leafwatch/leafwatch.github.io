@@ -15,16 +15,19 @@
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
+            margin: 0 auto;
+            padding: 0 20px; /* Add some padding on smaller screens */
             color: var(--text-color);
             background-color: var(--bg-color);
+            max-width: 1400px; /* Adjust this value as needed */
         }
         header {
             background-color: var(--primary-color);
             color: white;
             text-align: center;
             padding: 2rem;
+            margin-left: -20px;
+            margin-right: -20px;
         }
         header h1 {
             margin: 0;
@@ -40,6 +43,8 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            margin-left: -20px;
+            margin-right: -20px;
         }
         nav a {
             color: white;
@@ -73,17 +78,21 @@
             color: white;
             text-align: center;
             padding: 1rem;
+            margin-left: -20px;
+            margin-right: -20px;
         }
         footer a {
             color: white;
         }
         /* Add more styles here */
 
-        /* Carousel styles */
+        /* Updated Carousel styles */
         .carousel {
             position: relative;
-            width: 100%;
-            height: 400px;
+            width: calc(100% + 40px); /* Compensate for body padding */
+            margin-left: -20px; /* Offset the body padding */
+            margin-right: -20px;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
             overflow: hidden;
         }
         .carousel-item {
@@ -102,6 +111,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
         }
         .carousel-text {
             position: absolute;
