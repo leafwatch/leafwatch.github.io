@@ -11,6 +11,7 @@
             --secondary-color: #45a049;
             --text-color: #333;
             --bg-color: #f4f4f4;
+            --page-bg-color: #e8f5e9; /* New light green background color */
         }
         body {
             font-family: 'Roboto', sans-serif;
@@ -18,7 +19,7 @@
             margin: 0 auto;
             padding: 0 20px; /* Add some padding on smaller screens */
             color: var(--text-color);
-            background-color: var(--bg-color);
+            background-color: var(--page-bg-color); /* Updated background color */
             max-width: 1400px; /* Adjust this value as needed */
         }
         header {
@@ -56,10 +57,35 @@
             background-color: var(--secondary-color);
         }
         section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 4rem 20px; /* Add horizontal padding */
+            margin: 0 -20px 2rem -20px; /* Extend to full width and keep bottom margin */
+            background-color: var(--bg-color);
         }
+
+        section > * {
+            max-width: 1360px; /* Adjust max-width to match body (1400px - 40px padding) */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem; /* Add padding to section content */
+        }
+
+        @media (min-width: 1440px) {
+            body {
+                padding: 0;
+            }
+
+            section {
+                padding: 4rem 0;
+                margin-left: 0;
+                margin-right: 0;
+                border-radius: 8px; /* Restore rounded corners for larger screens */
+            }
+
+            section > * {
+                padding: 0 2rem; /* Add padding to section content on larger screens */
+            }
+        }
+
         .cta-button {
             display: inline-block;
             background-color: var(--primary-color);
