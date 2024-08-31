@@ -11,16 +11,17 @@
             --secondary-color: #45a049;
             --text-color: #333;
             --bg-color: #f4f4f4;
-            --page-bg-color: #e8f5e9; /* New light green background color */
+            --page-bg-color: #e8f5e9;
         }
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             margin: 0 auto;
-            padding: 0 20px; /* Add some padding on smaller screens */
+            padding: 0 20px;
             color: var(--text-color);
-            background-color: var(--page-bg-color); /* Updated background color */
-            max-width: 1400px; /* Adjust this value as needed */
+            background-color: var(--page-bg-color);
+            max-width: 1400px;
+            font-size: 22px;
         }
         header {
             background-color: var(--primary-color);
@@ -29,7 +30,7 @@
             background-position: center;
             color: white;
             text-align: center;
-            padding: 6rem 2rem; /* Increased padding for more space */
+            padding: 6rem 2rem;
             position: relative;
         }
 
@@ -50,12 +51,12 @@
 
         header h1 {
             margin: 0;
-            font-size: 4rem; /* Larger font size */
-            font-weight: 700; /* Bolder font weight */
-            text-transform: uppercase; /* Uppercase text */
-            letter-spacing: 2px; /* Increased letter spacing */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
-            margin-bottom: 1rem; /* Space between h1 and p */
+            font-size: 4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 1rem;
         }
 
         @media (max-width: 799px) {
@@ -65,11 +66,11 @@
         }
 
         header p {
-            font-size: 1.5rem; /* Slightly larger font size */
-            font-weight: 300; /* Lighter font weight for contrast */
-            max-width: 600px; /* Limit width for better readability */
-            margin: 1rem auto 0; /* Center the text and add top margin */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 1rem auto 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         }
         nav {
             background-color: #333;
@@ -88,8 +89,8 @@
             background-color: var(--secondary-color);
         }
         section {
-            padding: 4rem 20px; /* Add horizontal padding */
-            margin: 0 0 2rem 0; /* Extend to full width and keep bottom margin */
+            padding: 4rem 20px;
+            margin: 0 0 2rem 0;
             background-color: var(--bg-color);
         }
 
@@ -97,7 +98,7 @@
             max-width: 1360px; /* Adjust max-width to match body (1400px - 40px padding) */
             margin-left: auto;
             margin-right: auto;
-            padding: 0 2rem; /* Add padding to section content */
+            padding: 0 2rem;
         }
 
         li {
@@ -143,7 +144,6 @@
         footer a {
             color: white;
         }
-        /* Add more styles here */
 
         /* Updated Carousel styles */
         .carousel {
@@ -298,10 +298,10 @@
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 const targetId = this.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
-                
+
                 if (targetElement) {
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
