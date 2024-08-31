@@ -21,6 +21,7 @@
             color: var(--text-color);
             background-color: var(--page-bg-color);
             max-width: 1400px;
+            font-size: 22px;
         }
         header {
             background-color: var(--primary-color);
@@ -60,7 +61,7 @@
 
         @media (max-width: 799px) {
             header h1 {
-                font-size: 3rem;
+                font-size: 3em;
             }
         }
 
@@ -378,12 +379,29 @@
                 const targetElement = document.getElementById(targetId);
 
                 if (targetElement) {
+                    // Update the URL in the address bar
+                    history.pushState(null, '', `#${targetId}`);
+
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
                 }
             });
+        });
+
+        // Handle browser back/forward navigation
+        window.addEventListener('popstate', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetElement = document.getElementById(hash);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
         });
     </script>
 </body>
