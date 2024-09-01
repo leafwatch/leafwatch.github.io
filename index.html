@@ -66,7 +66,15 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        .nav-links {
+            display: flex;
+        }
+
         nav a {
             color: white;
             text-decoration: none;
@@ -76,6 +84,20 @@
         nav a:hover {
             background-color: var(--secondary-color);
         }
+
+        .language-selector {
+            margin-left: auto;
+        }
+
+        #language-select {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         section {
             padding: 4rem 20px;
             margin: 0 0 2rem 0;
@@ -237,6 +259,35 @@
             pointer-events: none;
             opacity: 0.6;
         }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .language-selector select {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -246,31 +297,39 @@
     </header>
 
     <nav>
-        <a href="#description">Description</a>
-        <a href="#download">Download</a>
-        <a href="#about">About Us</a>
+        <div class="nav-links">
+            <a href="#description" data-translate="description">Description</a>
+            <a href="#download" data-translate="download">Download</a>
+            <a href="#about" data-translate="aboutUs">About Us</a>
+        </div>
+        <div class="language-selector">
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+            </select>
+        </div>
     </nav>
 
     <div class="carousel">
         <div class="carousel-item active">
             <img src="./images/farmer-looking-over-wines.jpeg" alt="Crop field">
             <div class="carousel-text">
-                <h3>Protect Your Crops</h3>
-                <p>Use LeafWatch to detect and prevent crop diseases early.</p>
+                <h3 data-translate="protectYourCropsHeader">Protect Your Crops</h3>
+                <p data-translate="protectYourCropsDesc">Use LeafWatch to detect and prevent crop diseases early.</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="./images/farmer-taking-photo-of-wine.jpeg" alt="Farmer using app">
             <div class="carousel-text">
-                <h3>Easy to Use</h3>
-                <p>Simply take a photo and get instant analysis of your crops' health.</p>
+                <h3 data-translate="easyToUseHeader">Easy to Use</h3>
+                <p data-translate="easyToUseDescription">Simply take a photo and get instant analysis of your crops' health.</p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="./images/farmer-looking-at-data-with-phone-in-hand.jpeg" alt="Data insights">
             <div class="carousel-text">
-                <h3>Data-Driven Insights</h3>
-                <p>Track your crop health over time and make informed decisions.</p>
+                <h3 data-translate="dataDrivenInsightsHeader">Data-Driven Insights</h3>
+                <p data-translate="dataDrivenInsightsDescription">Track your crop health over time and make informed decisions.</p>
             </div>
         </div>
         <div class="carousel-arrow left">&lt;</div>
@@ -278,29 +337,29 @@
     </div>
 
     <section id="description">
-        <h2>Description</h2>
-        <p>LeafWatch is a revolutionary mobile app that empowers farmers to monitor and protect their crops using cutting-edge AI technology. Simply take a photo of your crops, and our app will instantly analyze it for signs of pests, diseases, and watering issues.</p>
-        <p>Key features:</p>
+        <h2 data-translate="description">Description</h2>
+        <p data-translate="descriptionText">LeafWatch is a revolutionary mobile app that empowers farmers to monitor and protect their crops using cutting-edge AI technology. Simply take a photo of your crops, and our app will instantly analyze it for signs of pests, diseases, and watering issues.</p>
+        <p data-translate="keyFeatures">Key features:</p>
         <ul>
-            <li>Instant pest and disease detection</li>
-            <li>Watering analysis (under/over watering identification)</li>
-            <li>Personalized recommendations for crop health</li>
-            <li>Historical data tracking and insights</li>
+            <li data-translate="instantPestAndDiseaseDetection">Instant pest and disease detection</li>
+            <li data-translate="wateringAnalysis">Watering analysis (under/over watering identification)</li>
+            <li data-translate="personalizedRecommendations">Personalized recommendations for crop health</li>
+            <li data-translate="historicalDataTracking">Historical data tracking and insights</li>
         </ul>
     </section>
 
 
     <section id="download">
-        <h2>Download</h2>
-        <p>LeafWatch is coming soon! Stay tuned for our app launch.</p>
+        <h2 data-translate="download">Download</h2>
+        <p data-translate="comingSoon">LeafWatch is coming soon! Stay tuned for our app launch.</p>
         <span class="cta-button disabled">Download for iOS (Coming Soon)</span>
         <span class="cta-button disabled">Download for Android (Coming Soon)</span>
     </section>
 
     <section id="about">
-        <h2>About Us</h2>
-        <p>At LeafWatch, we're passionate about combining agriculture and technology to help farmers maximize their crop yields and minimize losses. Our team of agricultural experts and AI specialists work tirelessly to provide the most accurate and helpful crop monitoring solution on the market.</p>
-        <p>Our mission is to empower farmers worldwide with accessible, easy-to-use technology that makes a real difference in crop management and food production.</p>
+        <h2 data-translate="aboutUs">About Us</h2>
+        <p data-translate="aboutUsText">At LeafWatch, we're passionate about combining agriculture and technology to help farmers maximize their crop yields and minimize losses. Our team of agricultural experts and AI specialists work tirelessly to provide the most accurate and helpful crop monitoring solution on the market.</p>
+        <p data-translate="aboutUsMission">Our mission is to empower farmers worldwide with accessible, easy-to-use technology that makes a real difference in crop management and food production.</p>
 
         <div class="team-cards">
             <div class="team-card">
@@ -391,6 +450,48 @@
                 }
             }
         });
+
+        // Language translation
+        const translations = {
+            es: {
+                description: "Descripción",
+                download: "Descargar",
+                aboutUs: "Sobre Nosotros",
+                protectYourCropsHeader: "Protege tus cultivos",
+                protectYourCropsDesc: "Utilice LeafWatch para detectar y prevenir enfermedades de los cultivos de forma temprana.",
+                easyToUseHeader: "Fácil de usar",
+                easyToUseDescription: "Simplemente tome una foto y obtenga un análisis instantáneo de la salud de sus cultivos.",
+                dataDrivenInsightsHeader: "Perspectivas basadas en datos",
+                dataDrivenInsightsDescription: "Realice un seguimiento de la salud de sus cultivos a lo largo del tiempo y tome decisiones informadas.",
+                descriptionText: "LeafWatch es una aplicación móvil revolucionaria que permite a los agricultores monitorear y proteger sus cultivos mediante tecnología de inteligencia artificial de vanguardia. Simplemente tome una foto de sus cultivos y nuestra aplicación la analizará instantáneamente para detectar señales de plagas, enfermedades y problemas de riego.",
+                keyFeatures: "Características principales:",
+                instantPestAndDiseaseDetection: "Detección instantánea de plagas y enfermedades.",
+                wateringAnalysis: "Análisis de riego (identificación de riego excesivo o insuficiente)",
+                personalizedRecommendations: "Recomendaciones personalizadas para la salud de los cultivos.",
+                historicalDataTracking: "Seguimiento de datos históricos y perspectivas.",
+                download: "Descargar",
+                comingSoon: "LeafWatch está próximamente! Mantente atento a nuestro lanzamiento de la aplicación.",
+                aboutUsText: "En LeafWatch, nos apasiona combinar agricultura y tecnología para ayudar a los agricultores a maximizar sus cosechas y minimizar sus pérdidas. Nuestro equipo de expertos agrícolas y especialistas en IA trabajan incansablemente para proporcionar la solución de monitoreo de cultivos más precisa y útil del mercado.",
+                aboutUsMission: "Nuestra misión es empoderar agricultores de todo el mundo con tecnología accesible y fácil de usar que hace una diferencia real en la gestión de cultivos y producción de alimentos.",
+            }
+        };
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        const languageSelect = document.getElementById('language-select');
+        languageSelect.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+
+        // Initialize with English
+        updateLanguage('en');
     </script>
 </body>
 </html>
