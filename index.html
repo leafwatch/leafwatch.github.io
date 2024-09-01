@@ -453,6 +453,27 @@
 
         // Language translation
         const translations = {
+            en: {
+                description: "Description",
+                download: "Download",
+                aboutUs: "About Us",
+                protectYourCropsHeader: "Protect Your Crops",
+                protectYourCropsDesc: "Use LeafWatch to detect and prevent crop diseases early.",
+                easyToUseHeader: "Easy to Use",
+                easyToUseDescription: "Simply take a photo and get instant analysis of your crops' health.",
+                dataDrivenInsightsHeader: "Data-Driven Insights",
+                dataDrivenInsightsDescription: "Track your crop health over time and make informed decisions.",
+                descriptionText: "LeafWatch is a revolutionary mobile app that empowers farmers to monitor and protect their crops using cutting-edge AI technology. Simply take a photo of your crops, and our app will instantly analyze it for signs of pests, diseases, and watering issues.",
+                keyFeatures: "Key features:",
+                instantPestAndDiseaseDetection: "Instant pest and disease detection",
+                wateringAnalysis: "Watering analysis (under/over watering identification)",
+                personalizedRecommendations: "Personalized recommendations for crop health",
+                historicalDataTracking: "Historical data tracking and insights",
+                comingSoon: "LeafWatch is coming soon! Stay tuned for our app launch.",
+                aboutUsText: "At LeafWatch, we're passionate about combining agriculture and technology to help farmers maximize their crop yields and minimize losses. Our team of agricultural experts and AI specialists work tirelessly to provide the most accurate and helpful crop monitoring solution on the market.",
+                aboutUsMission: "Our mission is to empower farmers worldwide with accessible, easy-to-use technology that makes a real difference in crop management and food production.",
+                aiPoweredCropHealthMonitoring: "AI-Powered Crop Health Monitoring",
+            },
             es: {
                 description: "Descripción",
                 download: "Descargar",
@@ -487,7 +508,12 @@
 
             // Update URL with language parameter
             const url = new URL(window.location);
-            url.searchParams.set('lang', lang);
+            if (lang !== 'en') {
+                url.searchParams.set('lang', lang);
+            }
+            else {
+                url.searchParams.delete('lang');
+            }
             window.history.pushState({}, '', url);
 
             // Update language select dropdown
