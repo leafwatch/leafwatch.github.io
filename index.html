@@ -293,7 +293,7 @@
 <body>
     <header>
         <img src="./images/logo-with-name.png" alt="LeafWatch Logo" class="logo">
-        <p>AI-Powered Crop Health Monitoring</p>
+        <p data-translate="aiPoweredCropHealthMonitoring">AI-Powered Crop Health Monitoring</p>
     </header>
 
     <nav>
@@ -473,16 +473,25 @@
                 comingSoon: "LeafWatch está próximamente! Mantente atento a nuestro lanzamiento de la aplicación.",
                 aboutUsText: "En LeafWatch, nos apasiona combinar agricultura y tecnología para ayudar a los agricultores a maximizar sus cosechas y minimizar sus pérdidas. Nuestro equipo de expertos agrícolas y especialistas en IA trabajan incansablemente para proporcionar la solución de monitoreo de cultivos más precisa y útil del mercado.",
                 aboutUsMission: "Nuestra misión es empoderar agricultores de todo el mundo con tecnología accesible y fácil de usar que hace una diferencia real en la gestión de cultivos y producción de alimentos.",
+                aiPoweredCropHealthMonitoring: "Monitoreo de la salud de los cultivos con inteligencia artificial",
             }
         };
 
         function updateLanguage(lang) {
             document.querySelectorAll('[data-translate]').forEach(element => {
                 const key = element.getAttribute('data-translate');
-                if (translations[lang][key]) {
+                if (translations[lang] && translations[lang][key]) {
                     element.textContent = translations[lang][key];
                 }
             });
+
+            // Update URL with language parameter
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.history.pushState({}, '', url);
+
+            // Update language select dropdown
+            document.getElementById('language-select').value = lang;
         }
 
         const languageSelect = document.getElementById('language-select');
@@ -490,8 +499,21 @@
             updateLanguage(e.target.value);
         });
 
-        // Initialize with English
-        updateLanguage('en');
+        // Function to get language from URL
+        function getLanguageFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('lang') || 'en'; // Default to 'en' if not set
+        }
+
+        // Initialize with language from URL
+        const initialLang = getLanguageFromURL();
+        updateLanguage(initialLang);
+
+        // Handle browser back/forward navigation
+        window.addEventListener('popstate', function() {
+            const lang = getLanguageFromURL();
+            updateLanguage(lang);
+        });
     </script>
 </body>
 </html>
