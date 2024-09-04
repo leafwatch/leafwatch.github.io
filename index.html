@@ -1,545 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js" >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeafWatch - AI-Powered Crop Health Monitoring</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
-    <style>
-        :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #45a049;
-            --text-color: #333;
-            --bg-color: #f4f4f4;
-            --page-bg-color: #e8f5e9;
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            margin: 0 auto;
-            padding: 0 20px;
-            color: var(--text-color);
-            background-color: var(--page-bg-color);
-            max-width: 1400px;
-            font-size: 22px;
-        }
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 0 2rem;
-            position: relative;
-        }
 
-        header img.logo, header p {
-            position: relative;
-            z-index: 1;
-        }
-
-        header img.logo {
-            max-width: 1200px;
-            height: auto;
-            margin-bottom: 1rem;
-        }
-
-        header p {
-            font-size: 1.5rem;
-            font-weight: 300;
-            max-width: 600px;
-            margin: -2em auto 0;
-            padding: 0 0 1em 0;
-        }
-
-        @media (max-width: 799px) {
-            header img.logo {
-                max-width: 280px;
-            }
-            header p {
-                font-size: 1rem;
-            }
-        }
-
-        nav {
-            background-color: #333;
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            transition: background-color 0.3s;
-        }
-        nav a:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .language-selector {
-            margin-left: auto;
-        }
-
-        #language-select {
-            background-color: #333;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        section {
-            padding: 4rem 20px;
-            margin: 0 0 2rem 0;
-            background-color: var(--bg-color);
-        }
-
-        section > * {
-            max-width: 1360px; /* Adjust max-width to match body (1400px - 40px padding) */
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 2rem;
-        }
-
-        li {
-            list-style-position: inside;
-        }
-
-        @media (min-width: 1440px) {
-            body {
-                padding: 0;
-            }
-
-            section {
-                padding: 4rem 0;
-                margin-left: 0;
-                margin-right: 0;
-                border-radius: 8px; /* Restore rounded corners for larger screens */
-            }
-
-            section > * {
-                padding: 0 2rem; /* Add padding to section content on larger screens */
-            }
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            margin: 0.5rem 2rem;
-        }
-        .cta-button:hover {
-            background-color: var(--secondary-color);
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-        footer a {
-            color: white;
-        }
-
-        /* Updated Carousel styles */
-        .carousel {
-            position: relative;
-            padding-top: 56.25%; /* 16:9 aspect ratio */
-            overflow: hidden;
-        }
-        .carousel-item {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .carousel-item.active {
-            opacity: 1;
-        }
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-        .carousel-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .carousel-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
-            color: white;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .carousel-arrow.left {
-            left: 10px;
-        }
-        .carousel-arrow.right {
-            right: 10px;
-        }
-
-        .team-cards {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .team-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            text-align: center;
-            width: 250px;
-        }
-
-        .team-card img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-
-        .team-card h3 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        .team-card p {
-            margin: 0.5rem 0;
-            font-size: 1rem;
-            color: #666;
-        }
-
-        .linkedin-icon {
-            width: 24px;
-            height: 24px;
-            margin-top: 0.5rem;
-        }
-
-        @media (max-width: 600px) {
-            .team-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        .disabled {
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-        }
-
-        .language-selector select {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 600px) {
-            nav {
-                flex-direction: column;
-            }
-
-            .nav-links {
-                margin-bottom: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <img src="./images/logo-with-name.png" alt="LeafWatch Logo" class="logo">
-        <p data-translate="aiPoweredCropHealthMonitoring">AI-Powered Crop Health Monitoring</p>
-    </header>
-
-    <nav>
-        <div class="nav-links">
-            <a href="#description" data-translate="description">Description</a>
-            <a href="#download" data-translate="download">Download</a>
-            <a href="#about" data-translate="aboutUs">About Us</a>
-        </div>
-        <div class="language-selector">
-            <select id="language-select">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-            </select>
-        </div>
-    </nav>
-
-    <div class="carousel">
-        <div class="carousel-item active">
-            <img src="./images/farmer-looking-over-wines.jpeg" alt="Crop field">
-            <div class="carousel-text">
-                <h3 data-translate="protectYourCropsHeader">Protect Your Crops</h3>
-                <p data-translate="protectYourCropsDesc">Use LeafWatch to detect and prevent crop diseases early.</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="./images/farmer-taking-photo-of-wine.jpeg" alt="Farmer using app">
-            <div class="carousel-text">
-                <h3 data-translate="easyToUseHeader">Easy to Use</h3>
-                <p data-translate="easyToUseDescription">Simply take a photo and get instant analysis of your crops' health.</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="./images/farmer-looking-at-data-with-phone-in-hand.jpeg" alt="Data insights">
-            <div class="carousel-text">
-                <h3 data-translate="dataDrivenInsightsHeader">Data-Driven Insights</h3>
-                <p data-translate="dataDrivenInsightsDescription">Track your crop health over time and make informed decisions.</p>
-            </div>
-        </div>
-        <div class="carousel-arrow left">&lt;</div>
-        <div class="carousel-arrow right">&gt;</div>
-    </div>
-
-    <section id="description">
-        <h2 data-translate="description">Description</h2>
-        <p data-translate="descriptionText">LeafWatch is a revolutionary mobile app that empowers farmers to monitor and protect their crops using cutting-edge AI technology. Simply take a photo of your crops, and our app will instantly analyze it for signs of pests, diseases, and watering issues.</p>
-        <p data-translate="keyFeatures">Key features:</p>
-        <ul>
-            <li data-translate="instantPestAndDiseaseDetection">Instant pest and disease detection</li>
-            <li data-translate="wateringAnalysis">Watering analysis (under/over watering identification)</li>
-            <li data-translate="personalizedRecommendations">Personalized recommendations for crop health</li>
-            <li data-translate="historicalDataTracking">Historical data tracking and insights</li>
-        </ul>
-    </section>
-
-
-    <section id="download">
-        <h2 data-translate="download">Download</h2>
-        <p data-translate="comingSoon">LeafWatch is coming soon! Stay tuned for our app launch.</p>
-        <span class="cta-button disabled">Download for iOS (Coming Soon)</span>
-        <span class="cta-button disabled">Download for Android (Coming Soon)</span>
-    </section>
-
-    <section id="about">
-        <h2 data-translate="aboutUs">About Us</h2>
-        <p data-translate="aboutUsText">At LeafWatch, we're passionate about combining agriculture and technology to help farmers maximize their crop yields and minimize losses. Our team of agricultural experts and AI specialists work tirelessly to provide the most accurate and helpful crop monitoring solution on the market.</p>
-        <p data-translate="aboutUsMission">Our mission is to empower farmers worldwide with accessible, easy-to-use technology that makes a real difference in crop management and food production.</p>
-
-        <div class="team-cards">
-            <div class="team-card">
-                <img src="./images/pablo-pp.jpeg" alt="Pablo Gonzalez Portela">
-                <h3>Pablo Portela</h3>
-                <p>CEO & Co-founder</p>
-                <a href="https://www.linkedin.com/in/pablogonzalezportela/" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" class="mercado-match" width="24" height="24" focusable="false">
-                        <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-                    </svg>
-                </a>
-            </div>
-            <div class="team-card">
-                <img src="./images/tayfun-pp.jpeg" alt="Tayfun Sen">
-                <h3>Tayfun Sen</h3>
-                <p>CTO & Co-founder</p>
-                <a href="https://www.linkedin.com/in/tayfun/" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" class="mercado-match" width="24" height="24" focusable="false">
-                        <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 LeafWatch. All rights reserved. | <a href="https://leafwatch.ai">leafwatch.ai</a></p>
-    </footer>
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LeafWatch</title>
 
     <script>
-        const carousel = document.querySelector('.carousel');
-        const items = carousel.querySelectorAll('.carousel-item');
-        const leftArrow = carousel.querySelector('.carousel-arrow.left');
-        const rightArrow = carousel.querySelector('.carousel-arrow.right');
-        let currentIndex = 0;
-
-        function showItem(index) {
-            items[currentIndex].classList.remove('active');
-            items[index].classList.add('active');
-            currentIndex = index;
-        }
-
-        function nextItem() {
-            let index = (currentIndex + 1) % items.length;
-            showItem(index);
-        }
-
-        function prevItem() {
-            let index = (currentIndex - 1 + items.length) % items.length;
-            showItem(index);
-        }
-
-        leftArrow.addEventListener('click', prevItem);
-        rightArrow.addEventListener('click', nextItem);
-
-        setInterval(nextItem, 5000); // Auto-cycle every 5 seconds
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-
-                if (targetElement) {
-                    // Update the URL in the address bar
-                    history.pushState(null, '', `#${targetId}`);
-
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Handle browser back/forward navigation
-        window.addEventListener('popstate', function() {
-            const hash = window.location.hash.substring(1);
-            if (hash) {
-                const targetElement = document.getElementById(hash);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-
-        // Language translation
-        const translations = {
-            en: {
-                description: "Description",
-                download: "Download",
-                aboutUs: "About Us",
-                protectYourCropsHeader: "Protect Your Crops",
-                protectYourCropsDesc: "Use LeafWatch to detect and prevent crop diseases early.",
-                easyToUseHeader: "Easy to Use",
-                easyToUseDescription: "Simply take a photo and get instant analysis of your crops' health.",
-                dataDrivenInsightsHeader: "Data-Driven Insights",
-                dataDrivenInsightsDescription: "Track your crop health over time and make informed decisions.",
-                descriptionText: "LeafWatch is a revolutionary mobile app that empowers farmers to monitor and protect their crops using cutting-edge AI technology. Simply take a photo of your crops, and our app will instantly analyze it for signs of pests, diseases, and watering issues.",
-                keyFeatures: "Key features:",
-                instantPestAndDiseaseDetection: "Instant pest and disease detection",
-                wateringAnalysis: "Watering analysis (under/over watering identification)",
-                personalizedRecommendations: "Personalized recommendations for crop health",
-                historicalDataTracking: "Historical data tracking and insights",
-                comingSoon: "LeafWatch is coming soon! Stay tuned for our app launch.",
-                aboutUsText: "At LeafWatch, we're passionate about combining agriculture and technology to help farmers maximize their crop yields and minimize losses. Our team of agricultural experts and AI specialists work tirelessly to provide the most accurate and helpful crop monitoring solution on the market.",
-                aboutUsMission: "Our mission is to empower farmers worldwide with accessible, easy-to-use technology that makes a real difference in crop management and food production.",
-                aiPoweredCropHealthMonitoring: "AI-Powered Crop Health Monitoring",
-            },
-            es: {
-                description: "Descripción",
-                download: "Descargar",
-                aboutUs: "Sobre Nosotros",
-                protectYourCropsHeader: "Protege tus cultivos",
-                protectYourCropsDesc: "Utilice LeafWatch para detectar y prevenir enfermedades de los cultivos de forma temprana.",
-                easyToUseHeader: "Fácil de usar",
-                easyToUseDescription: "Simplemente tome una foto y obtenga un análisis instantáneo de la salud de sus cultivos.",
-                dataDrivenInsightsHeader: "Perspectivas basadas en datos",
-                dataDrivenInsightsDescription: "Realice un seguimiento de la salud de sus cultivos a lo largo del tiempo y tome decisiones informadas.",
-                descriptionText: "LeafWatch es una aplicación móvil revolucionaria que permite a los agricultores monitorear y proteger sus cultivos mediante tecnología de inteligencia artificial de vanguardia. Simplemente tome una foto de sus cultivos y nuestra aplicación la analizará instantáneamente para detectar señales de plagas, enfermedades y problemas de riego.",
-                keyFeatures: "Características principales:",
-                instantPestAndDiseaseDetection: "Detección instantánea de plagas y enfermedades.",
-                wateringAnalysis: "Análisis de riego (identificación de riego excesivo o insuficiente)",
-                personalizedRecommendations: "Recomendaciones personalizadas para la salud de los cultivos.",
-                historicalDataTracking: "Seguimiento de datos históricos y perspectivas.",
-                download: "Descargar",
-                comingSoon: "LeafWatch está próximamente! Mantente atento a nuestro lanzamiento de la aplicación.",
-                aboutUsText: "En LeafWatch, nos apasiona combinar agricultura y tecnología para ayudar a los agricultores a maximizar sus cosechas y minimizar sus pérdidas. Nuestro equipo de expertos agrícolas y especialistas en IA trabajan incansablemente para proporcionar la solución de monitoreo de cultivos más precisa y útil del mercado.",
-                aboutUsMission: "Nuestra misión es empoderar agricultores de todo el mundo con tecnología accesible y fácil de usar que hace una diferencia real en la gestión de cultivos y producción de alimentos.",
-                aiPoweredCropHealthMonitoring: "Monitoreo de la salud de los cultivos con inteligencia artificial",
-            }
-        };
-
-        function updateLanguage(lang) {
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-
-            // Update URL with language parameter
-            const url = new URL(window.location);
-            if (lang !== 'en') {
-                url.searchParams.set('lang', lang);
-            }
-            else {
-                url.searchParams.delete('lang');
-            }
-            window.history.pushState({}, '', url);
-
-            // Update language select dropdown
-            document.getElementById('language-select').value = lang;
-        }
-
-        const languageSelect = document.getElementById('language-select');
-        languageSelect.addEventListener('change', (e) => {
-            updateLanguage(e.target.value);
-        });
-
-        // Function to get language from URL
-        function getLanguageFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('lang') || 'en'; // Default to 'en' if not set
-        }
-
-        // Initialize with language from URL
-        const initialLang = getLanguageFromURL();
-        updateLanguage(initialLang);
-
-        // Handle browser back/forward navigation
-        window.addEventListener('popstate', function() {
-            const lang = getLanguageFromURL();
-            updateLanguage(lang);
-        });
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
     </script>
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="manifest" href="site.webmanifest">
+
+</head>
+
+<body id="top">
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+
+    <!-- page wrap
+    ================================================== -->
+    <div id="page" class="s-pagewrap">
+
+
+        <!-- # site header
+        ================================================== -->
+        <header class="s-header">
+
+            <div class="row s-header__inner">
+                <div class="column lg-12 s-header__block">
+
+
+                </div> <!-- end s-header__block -->
+            </div> <!-- end s-header__inner -->
+
+        </header> <!-- end s-header -->
+
+
+        <!-- # intro
+        ================================================== -->
+        <section id="intro" class="s-intro">
+
+            <div class="s-intro__bg"></div>
+
+            <div class="row s-intro__content">
+                <div class="column lg-12">
+
+                    <div class="s-intro__content-top">
+                        <h1>
+                        We are busy building LeafWatch.
+                        </h1>
+                        <p class="">
+                        We help you detect pests and diseases in your crops as soon as possible. We do this with a simple mobile app and computer vision; effectively, quickly and inexpensively. Meant for farmers of any size, anywhere.
+                        </p>
+                    </div> <!-- end s-intro__content-top -->
+
+                    <div class="s-intro__content-sep">
+                        <span></span>
+                        <span>Launching somewhere in Oct '24</span>
+                        <span></span>
+                    </div> <!-- end s-intro__content-sep -->
+
+
+                </div>
+            </div> <!-- intro__content -->
+
+            <div class="s-intro__scroll-down">
+                <a href="#about" class="smoothscroll">
+                    <span>Scroll Down</span>
+                </a>
+            </div> <!-- s-intro__scroll-down -->
+
+        </section> <!-- end s-intro -->
+
+
+        <!-- # about
+        ================================================== -->
+        <section id="about" class="s-about">
+
+            <div class="row process-list">
+
+                <div class="column lg-12 list-block">
+
+
+                    <div class="list-block__item ss-animate ss-fade-up">
+                        <div class="list-block__title">
+                            <h3 class="h5">Fast</h3>
+                        </div>
+                        <div class="list-block__text">
+                            <p>
+                            Plants images are taken with a mobile phone and the results are displayed right away. No need for an expert in the field.
+                            </p>
+                        </div>
+                    </div> <!-- end list-block__item -->
+
+                    <div class="list-block__item ss-animate ss-fade-up">
+                        <div class="list-block__title">
+                            <h3 class="h5">Effective</h3>
+                        </div>
+                        <div class="list-block__text">
+                            <p>
+                            The images are analyzed using computer vision techniques. Our system was trained on millions of images and tested against the known pests and diseases for the specific crop. This yields a high level of accuracy.
+                            </p>
+                        </div>
+                    </div> <!-- end list-block__item -->
+
+                    <div class="list-block__item ss-animate ss-fade-up">
+                        <div class="list-block__title">
+                            <h3 class="h5">Easy</h3>
+                        </div>
+                        <div class="list-block__text">
+                            <p>
+                            No need for special hardware, just your mobile phone equipped with a camera.
+                            Download the app and start scanning your crops.
+                            </p>
+                        </div>
+                    </div> <!-- end list-block__item -->
+
+                    <div class="list-block__item ss-animate ss-fade-up">
+                        <div class="list-block__title">
+                            <h3 class="h5">Eco-friendly</h3>
+                        </div>
+                        <div class="list-block__text">
+                            <p>
+                            Allows to take action immediately and reduce (or void altogether!) the usage of pesticides.
+                            </p>
+                        </div>
+                    </div> <!-- end list-block__item -->
+
+                </div> <!-- end list-block -->
+
+            </div> <!-- end process-list -->
+
+        </section> <!-- end s-about -->
+
+
+        <!-- # footer
+        ================================================== -->
+        <footer id="footer" class="s-footer">
+
+            <div class="row s-footer__main">
+                <div class="column s-footer__main-content">
+
+                    <h3 class="h6">Get In Touch</h3>
+
+                    <p class="contact-email">
+                        <a href="mailto:leafwatch@fastmail.com">leafwatch@fastmail.com</a>
+                    </p>
+
+                </div> <!-- end s-footer__main-content -->
+            </div> <!-- end s-footer__main -->
+
+            <div class="row s-footer__bottom">
+                <div class="column lg-12 s-footer__bottom-content">
+
+                    <p class="ss-copyright">
+                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
+                    </p>
+
+
+                </div> <!-- end s-footer__bottom-content -->
+            </div> <!-- end s-footer__bottom -->
+
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1">
+                        <path d="M 291.199 2.131 C 288.833 3.302, 286.133 5.426, 285.199 6.852 C 284.264 8.278, 259.558 33.532, 230.295 62.972 C 193.865 99.624, 176.603 117.672, 175.545 120.218 C 172.378 127.838, 174.552 135.386, 182.022 142.711 C 189.774 150.313, 197.881 152.181, 205.626 148.151 C 207.788 147.027, 224.968 130.635, 244.495 111.068 C 263.742 91.781, 279.829 76, 280.245 76 C 281.335 76, 281.145 332.354, 280.045 345.651 C 278.022 370.090, 270.240 390.839, 256.131 409.406 C 242.480 427.370, 222.118 442.102, 201 449.294 C 184 455.083, 182.157 455.257, 131 455.901 C 78.663 456.561, 80.239 456.362, 74.645 463.010 C 71.178 467.130, 69.673 473.189, 70.265 480.644 C 70.887 488.481, 73.949 494.027, 79.368 497.132 L 83.500 499.500 126.500 499.809 C 172.926 500.142, 182.387 499.567, 200.500 495.311 C 257.790 481.850, 304.942 435.391, 319.522 378.036 C 324.535 358.318, 324.351 364.069, 324.734 215.064 L 325.091 75.628 360.796 111.207 C 380.433 130.775, 398.020 147.550, 399.879 148.485 C 407.249 152.192, 416.077 149.965, 423.521 142.521 C 430.724 135.318, 432.929 126.760, 429.400 119.700 C 428.521 117.940, 404.108 92.618, 375.150 63.428 C 346.193 34.238, 321.404 8.866, 320.065 7.046 C 316.580 2.310, 310.924 0.048, 302.500 0.023 C 297.340 0.007, 294.369 0.561, 291.199 2.131" stroke="none" fill="#000000" fill-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div> <!-- end ss-go-top -->
+
+        </footer> <!-- end s-footer -->
+
+    </div> <!-- end s-pagewrap -->
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
 </html>
