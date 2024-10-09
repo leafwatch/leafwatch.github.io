@@ -160,8 +160,8 @@
 
   /* link
    */
-    --color-link                       : var(--color-1);
-    --color-link-hover                 : var(--color-1-dark);
+    --color-link                       : var(--color-white);
+    --color-link-hover                 : var(--color-gray-5);
     --color-link-active                : var(--color-1-dark);
 
   /* buttons
