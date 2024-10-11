@@ -3727,34 +3727,13 @@ img.u-pull-left {
     padding-bottom : var(--vspace-5);
     text-align     : center;
     position       : relative;
-}
-
-.s-video-block__bg-left,
-.s-video-block__bg-right {
-    pointer-events     : none;
+    background-image: url(../images/video-bg-01.jpg);
     background-position: center;
     background-repeat  : no-repeat;
     background-size    : cover;
-    position           : absolute;
-    top                : 0;
-    bottom             : 0;
 }
 
-.s-video-block__bg-left {
-    background-image: url(../images/video-bg-01.jpg);
-    left            : 0;
-    right           : 50%;
-}
 
-.s-video-block__bg-right {
-    background-image: url(../images/video-bg-02.jpg);
-    left            : 50%;
-    right           : 0;
-}
-
-.s-video-block__content {
-    position: relative;
-}
 
 .video-link {
     display         : flex;
